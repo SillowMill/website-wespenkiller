@@ -65,31 +65,31 @@ const CONFIG = {
 
   // Certifications
   certifications: [
-    {"label": "Gecertificeerd Verdelger", "icon": "award"},
-    {"label": "Aziatische Hoornaar Expert", "icon": "filecheck"},
-    {"label": "Lokale Specialist", "icon": "leaf"},
+    { "label": "Gecertificeerd Verdelger", "icon": "award" },
+    { "label": "Aziatische Hoornaar Expert", "icon": "filecheck" },
+    { "label": "Lokale Specialist", "icon": "leaf" },
   ],
 
   // Services with pricing
   services: [
-    {"title": "Wespenverdelging", "desc": "Professionele verdelging van wespennesten op elke locatie. Snel en veilig.", "price": "Vanaf €50"},
-    {"title": "Aziatische Hoornaar", "desc": "Gecertificeerde bestrijding van Aziatische hoornaars sinds 2023. Veilige verwijdering.", "price": "Vanaf €75"},
-    {"title": "Europese Hoornaar", "desc": "Veilige verwijdering van hoornaarnesten met professionele uitrusting.", "price": "Vanaf €65"},
-    {"title": "Bijenadvies", "desc": "Wij beschermen bijen! Bij bijenkolonies verwijzen wij u door naar een lokale imker.", "price": "Gratis advies"},
-    {"title": "Preventief Advies", "desc": "Tips en advies om te voorkomen dat wespen een nest bouwen bij uw woning.", "price": "Gratis"},
-    {"title": "Noodinterventie", "desc": "Spoedeisende wespenverdelging wanneer er direct gevaar dreigt.", "price": "Vanaf €75"},
+    { "title": "Wespenverdelging", "desc": "Professionele verdelging van wespennesten op elke locatie. Snel en veilig.", "price": "Vanaf €50" },
+    { "title": "Aziatische Hoornaar", "desc": "Gecertificeerde bestrijding van Aziatische hoornaars sinds 2023. Veilige verwijdering.", "price": "Vanaf €75" },
+    { "title": "Europese Hoornaar", "desc": "Veilige verwijdering van hoornaarnesten met professionele uitrusting.", "price": "Vanaf €65" },
+    { "title": "Bijenadvies", "desc": "Wij beschermen bijen! Bij bijenkolonies verwijzen wij u door naar een lokale imker.", "price": "Gratis advies" },
+    { "title": "Preventief Advies", "desc": "Tips en advies om te voorkomen dat wespen een nest bouwen bij uw woning.", "price": "Gratis" },
+    { "title": "Noodinterventie", "desc": "Spoedeisende wespenverdelging wanneer er direct gevaar dreigt.", "price": "Vanaf €75" },
   ],
 
   // Testimonials
   testimonials: [
-    {"name": "Jan B.", "location": "Boortmeerbeek", "text": "Eddy was er dezelfde dag! Wespennest vakkundig verwijderd. Heel vriendelijk en professioneel."},
-    {"name": "Lies D.", "location": "Keerbergen", "text": "Snel, efficiënt en een eerlijke prijs. De Wespenkiller is een absolute aanrader!"},
-    {"name": "Tom V.", "location": "Haacht", "text": "Al twee keer gebeld en beide keren binnen het uur ter plaatse. Top service!"},
+    { "name": "Jan B.", "location": "Boortmeerbeek", "text": "Eddy was er dezelfde dag! Wespennest vakkundig verwijderd. Heel vriendelijk en professioneel." },
+    { "name": "Lies D.", "location": "Keerbergen", "text": "Snel, efficiënt en een eerlijke prijs. De Wespenkiller is een absolute aanrader!" },
+    { "name": "Tom V.", "location": "Haacht", "text": "Al twee keer gebeld en beide keren binnen het uur ter plaatse. Top service!" },
   ],
 
   // Service regions
   regions: [
-    {"region": "Vlaams-Brabant", "cities": ['Boortmeerbeek', 'Keerbergen', 'Bonheiden', 'Haacht', 'Zemst', 'Mechelen', 'Leuven', 'Heist-op-den-Berg', 'Tremelo', 'Rotselaar']},
+    { "region": "Vlaams-Brabant", "cities": ['Boortmeerbeek', 'Keerbergen', 'Bonheiden', 'Haacht', 'Zemst', 'Mechelen', 'Leuven', 'Heist-op-den-Berg', 'Tremelo', 'Rotselaar'] },
   ],
 
   // Social links
@@ -206,7 +206,8 @@ const Hero = () => {
           alt="Professionele ongediertebestrijder aan het werk in beschermende kleding"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-brand-600/60" />
+        {/* Brand gradient overlay — 70-85% opacity for consistent readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-600/90 via-brand-600/80 to-brand-500/70" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-24">
@@ -215,7 +216,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-brand-500/20 border border-brand-500/40 text-brand-50 px-4 py-2 rounded-full mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 bg-white/10 border border-white/25 text-white px-4 py-2 rounded-full mb-6 backdrop-blur-sm"
           >
             <Clock size={16} />
             <span className="font-display font-semibold text-sm">Interventie binnen 24 uur — 7 dagen per week</span>
@@ -232,7 +233,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-brand-50 text-lg md:text-xl mb-10 leading-relaxed"
+            className="text-white text-lg md:text-xl mb-10 leading-relaxed"
           >
             Heeft u last van ongewenste dieren en insecten? Bij {CONFIG.name} zijn we gespecialiseerd in wering en bestrijding van ongedierte over {CONFIG.region}. Snel, discreet en met garantie.
           </motion.p>
