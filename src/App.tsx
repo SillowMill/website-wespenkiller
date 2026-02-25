@@ -295,10 +295,10 @@ const Features = () => {
 
 const Process = () => {
   const steps = [
-    { icon: <Phone size={32} />, title: "1. Bel of vul het formulier in", desc: `Neem contact op met ${CONFIG.name}. Wij zijn 24/7 bereikbaar voor een gratis adviesgesprek.` },
-    { icon: <Search size={32} />, title: "2. Gratis inspectie ter plaatse", desc: "Onze technicus komt langs, identificeert het ongedierte en maakt een plan op maat." },
-    { icon: <SprayCan size={32} />, title: "3. Vakkundige behandeling", desc: "Met gecertificeerde, milieuvriendelijke methoden elimineren wij het probleem." },
-    { icon: <HeadphonesIcon size={32} />, title: "4. Opvolging & garantie", desc: "Na de behandeling volgen wij op. Komt het terug? Wij komen gratis opnieuw." },
+    { icon: <Phone size={28} />, step: "01", title: "Bel of vul het formulier in", desc: `Neem contact op met ${CONFIG.name}. Wij zijn 24/7 bereikbaar voor een gratis adviesgesprek.` },
+    { icon: <Search size={28} />, step: "02", title: "Gratis inspectie ter plaatse", desc: "Onze technicus komt langs, identificeert het ongedierte en maakt een plan op maat." },
+    { icon: <SprayCan size={28} />, step: "03", title: "Vakkundige behandeling", desc: "Met gecertificeerde, milieuvriendelijke methoden elimineren wij het probleem." },
+    { icon: <HeadphonesIcon size={28} />, step: "04", title: "Opvolging & garantie", desc: "Na de behandeling volgen wij op. Komt het terug? Wij komen gratis opnieuw." },
   ];
 
   return (
@@ -311,8 +311,9 @@ const Process = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((s, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm text-center relative">
-              <div className="bg-brand-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">{s.icon}</div>
+            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-md hover:shadow-xl transition-all text-center relative group">
+              <div className="absolute -top-3 -right-3 bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-display font-bold text-xs shadow-lg shadow-brand-500/30">{s.step}</div>
+              <div className="bg-gradient-to-br from-brand-500 to-brand-600 text-white w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-brand-500/20 group-hover:scale-110 transition-transform">{s.icon}</div>
               <h3 className="font-display text-lg font-bold text-zinc-900 mb-3">{s.title}</h3>
               <p className="text-zinc-500 leading-relaxed text-sm">{s.desc}</p>
             </motion.div>
@@ -483,16 +484,58 @@ const WhyChooseUs = () => {
   );
 };
 
-const Logos = () => (
-  <section className="py-16 bg-zinc-50 px-4 md:px-24 overflow-hidden">
-    <div className="max-w-7xl mx-auto text-center">
-      <p className="text-zinc-400 font-display font-medium mb-12 uppercase tracking-widest text-sm">Vertrouwd door bedrijven en gemeentes in {CONFIG.region}</p>
-      <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale">
-        <Bug size={48} /><ShieldCheck size={48} /><Zap size={48} /><Users size={48} /><Clock size={48} />
+const Logos = () => {
+  const certIcons: Record<string, React.ReactNode> = {
+    award: <Award size={28} />,
+    filecheck: <FileCheck size={28} />,
+    leaf: <Leaf size={28} />,
+  };
+
+  const trustStats = [
+    { value: CONFIG.reviewScore, label: "Google Score", icon: <Star size={20} fill="currentColor" /> },
+    { value: CONFIG.yearsExperience, label: "Jaar Ervaring", icon: <Zap size={20} /> },
+    { value: CONFIG.clientCount, label: "Klanten", icon: <Users size={20} /> },
+    { value: "24/7", label: "Bereikbaar", icon: <Clock size={20} /> },
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-b from-zinc-50 to-white px-4 md:px-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+          <span className="text-brand-500 font-display font-bold text-sm uppercase tracking-widest">Keurmerken & vertrouwen</span>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-zinc-900 mt-4">Waarom klanten ons vertrouwen</h2>
+        </motion.div>
+
+        {/* Certification badges */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
+          {CONFIG.certifications.map((c, i) => (
+            <div key={i} className="flex items-center gap-3 bg-white px-6 py-4 rounded-2xl border border-brand-100 shadow-sm hover:shadow-md hover:border-brand-200 transition-all">
+              <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-brand-600 rounded-xl flex items-center justify-center text-white shadow-sm shadow-brand-500/20">
+                {certIcons[c.icon] || <ShieldCheck size={28} />}
+              </div>
+              <span className="font-display font-bold text-sm text-zinc-900">{c.label}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Trust stats bar */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-gradient-to-r from-brand-600 via-brand-500 to-brand-600 rounded-3xl p-8 md:p-10 shadow-xl shadow-brand-500/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {trustStats.map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="flex items-center justify-center gap-2 text-white/70 mb-2">
+                  {stat.icon}
+                </div>
+                <h4 className="font-display text-3xl md:text-4xl font-black text-white">{stat.value}</h4>
+                <p className="text-white/70 font-display font-medium text-sm mt-1">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Testimonials = () => (
   <section className="py-24 bg-white px-4 md:px-24 overflow-hidden">
